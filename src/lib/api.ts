@@ -1,4 +1,13 @@
-const API_BASE_URL = import.meta.env?.VITE_API_URL || "http://127.0.0.1:8000/api/v1";
+const rawUrl = (import.meta.env?.VITE_API_URL as string | undefined)?.trim();
+const normalizedUrl = rawUrl
+  ? (rawUrl.endsWith("/") ? rawUrl.slice(0, -1) : rawUrl)
+  : "https://medical-voice-backend-jvnd.onrender.com/api/v1";
+
+const API_BASE_URL = normalizedUrl.endsWith("/api/v1")
+  ? normalizedUrl
+  : normalizedUrl.endsWith("/api")
+  ? `${normalizedUrl}/v1`
+  : `${normalizedUrl}/api/v1`;
 
 export interface ApiUser {
   id: number;
