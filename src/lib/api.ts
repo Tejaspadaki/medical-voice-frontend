@@ -1,7 +1,13 @@
-const rawUrl = (import.meta.env?.VITE_API_URL as string | undefined)?.trim();
-const normalizedUrl = rawUrl
-  ? (rawUrl.endsWith("/") ? rawUrl.slice(0, -1) : rawUrl)
-  : "https://medical-voice-backend-jvnd.onrender.com/api/v1";
+// Production live backend endpoint on Render
+const DEFAULT_BACKEND_URL = "https://medical-voice-backend-jvnd.onrender.com/api/v1";
+
+const envUrl = (import.meta.env?.VITE_API_URL as string | undefined)?.trim();
+// If VITE_API_URL is missing or set to local 127.0.0.1/localhost, automatically route to the live Render backend
+const rawUrl = (!envUrl || envUrl.includes("127.0.0.1") || envUrl.includes("localhost"))
+  ? DEFAULT_BACKEND_URL
+  : envUrl;
+
+const normalizedUrl = rawUrl.endsWith("/") ? rawUrl.slice(0, -1) : rawUrl;
 
 const API_BASE_URL = normalizedUrl.endsWith("/api/v1")
   ? normalizedUrl
