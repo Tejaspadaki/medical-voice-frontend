@@ -181,13 +181,13 @@ export function LoginPage() {
               <span className="text-[10px] font-bold text-sky-700">Instant Test</span>
             </div>
 
-            <div className="grid grid-cols-1 gap-2.5">
-              {/* Doctor 1: Dr. Poornachandra Badiger */}
+            <div className="space-y-2 max-h-72 overflow-y-auto pr-1">
+              {/* Doctor: Dr. Poornachandra Badiger */}
               <button
                 type="button"
                 disabled={isLoading}
                 onClick={() => handleQuickLogin("poornachandrabadiger208@gmail.com", "Poorna@030")}
-                className="group text-left p-3 rounded-xl bg-sky-50/50 hover:bg-sky-100/70 border border-sky-200 hover:border-sky-300 transition-all flex items-center justify-between text-xs disabled:opacity-50 active:scale-[0.99] shadow-xs"
+                className="w-full group text-left p-2.5 rounded-xl bg-sky-50/50 hover:bg-sky-100/70 border border-sky-200 hover:border-sky-300 transition-all flex items-center justify-between text-xs disabled:opacity-50 active:scale-[0.99] shadow-xs"
               >
                 <div>
                   <div className="flex items-center gap-1.5">
@@ -195,45 +195,114 @@ export function LoginPage() {
                       🩺 ಡಾ. ಪೂರ್ಣಚಂದ್ರ ಬಡಿಗೇರ್ (Dr. Poornachandra)
                     </span>
                   </div>
-                  <p className="text-[11px] text-slate-500 mt-0.5">
-                    poornachandrabadiger208@gmail.com • ವೈದ್ಯರ ಪ್ರವೇಶ
+                  <p className="text-[10px] text-slate-500 mt-0.5">
+                    poornachandrabadiger208@gmail.com • Physician
                   </p>
                 </div>
-                <div className="flex items-center gap-1 text-[11px] font-bold text-sky-800 bg-sky-200/80 group-hover:bg-sky-600 group-hover:text-white border border-sky-300 px-2.5 py-1 rounded-lg transition-all shrink-0 shadow-xs">
+                <div className="flex items-center gap-1 text-[10px] font-bold text-sky-800 bg-sky-200/80 group-hover:bg-sky-600 group-hover:text-white border border-sky-300 px-2 py-1 rounded-lg transition-all shrink-0 shadow-xs">
                   <span>Sign In</span>
                   <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
                 </div>
               </button>
 
-              {/* Doctor 2: Dr. Anand Deshmukh */}
+              {/* Doctor: Dr. Amogh Kori */}
               <button
                 type="button"
                 disabled={isLoading}
-                onClick={() => handleQuickLogin("doctor@hospital.org", "Doctor123!")}
-                className="group text-left p-3 rounded-xl bg-slate-50 hover:bg-sky-50/70 border border-slate-200 hover:border-sky-300 transition-all flex items-center justify-between text-xs disabled:opacity-50 active:scale-[0.99] shadow-xs"
+                onClick={() => handleQuickLogin("amoghkori229@gmail.com", "Amogh@123")}
+                className="w-full group text-left p-2.5 rounded-xl bg-sky-50/50 hover:bg-sky-100/70 border border-sky-200 hover:border-sky-300 transition-all flex items-center justify-between text-xs disabled:opacity-50 active:scale-[0.99] shadow-xs"
               >
                 <div>
                   <div className="flex items-center gap-1.5">
                     <span className="font-bold text-slate-900 group-hover:text-sky-700 transition-colors">
-                      🩺 ಡಾ. ಆನಂದ್ ದೇಶಮುಖ್ (Dr. Anand)
+                      🩺 ಡಾ. ಅಮೋಘ್ ಕೋರಿ (Dr. Amogh Kori)
                     </span>
                   </div>
-                  <p className="text-[11px] text-slate-500 mt-0.5">
-                    doctor@hospital.org • ಸಂಪೂರ್ಣ ಸಮಾಲೋಚನೆ & ಅನುಮೋದನೆ
+                  <p className="text-[10px] text-slate-500 mt-0.5">
+                    amoghkori229@gmail.com • Internal Medicine
                   </p>
                 </div>
-                <div className="flex items-center gap-1 text-[11px] font-bold text-sky-800 bg-sky-100 group-hover:bg-sky-600 group-hover:text-white border border-sky-200 px-2.5 py-1 rounded-lg transition-all shrink-0 shadow-xs">
+                <div className="flex items-center gap-1 text-[10px] font-bold text-sky-800 bg-sky-200/80 group-hover:bg-sky-600 group-hover:text-white border border-sky-300 px-2 py-1 rounded-lg transition-all shrink-0 shadow-xs">
                   <span>Sign In</span>
                   <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
                 </div>
               </button>
 
-              {/* Staff Nurse 1-Click Button */}
+              {/* Doctor: Dr. Anand Sasanur */}
+              <button
+                type="button"
+                disabled={isLoading}
+                onClick={() => handleQuickLogin("sasanuranand@gmail.com", "Anand@123")}
+                className="w-full group text-left p-2.5 rounded-xl bg-sky-50/50 hover:bg-sky-100/70 border border-sky-200 hover:border-sky-300 transition-all flex items-center justify-between text-xs disabled:opacity-50 active:scale-[0.99] shadow-xs"
+              >
+                <div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="font-bold text-slate-900 group-hover:text-sky-700 transition-colors">
+                      🩺 ಡಾ. ಆನಂದ್ ಸಸನೂರ್ (Dr. Anand Sasanur)
+                    </span>
+                  </div>
+                  <p className="text-[10px] text-slate-500 mt-0.5">
+                    sasanuranand@gmail.com • General Medicine
+                  </p>
+                </div>
+                <div className="flex items-center gap-1 text-[10px] font-bold text-sky-800 bg-sky-200/80 group-hover:bg-sky-600 group-hover:text-white border border-sky-300 px-2 py-1 rounded-lg transition-all shrink-0 shadow-xs">
+                  <span>Sign In</span>
+                  <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                </div>
+              </button>
+
+              {/* Doctor: Dr. Praveen Kumar Sajjan */}
+              <button
+                type="button"
+                disabled={isLoading}
+                onClick={() => handleQuickLogin("sajjanpraveenkumar382@gmail.com", "Praveen@123")}
+                className="w-full group text-left p-2.5 rounded-xl bg-sky-50/50 hover:bg-sky-100/70 border border-sky-200 hover:border-sky-300 transition-all flex items-center justify-between text-xs disabled:opacity-50 active:scale-[0.99] shadow-xs"
+              >
+                <div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="font-bold text-slate-900 group-hover:text-sky-700 transition-colors">
+                      🩺 ಡಾ. ಪ್ರವೀಣ್ ಕುಮಾರ್ ಸಜ್ಜನ (Dr. Praveen)
+                    </span>
+                  </div>
+                  <p className="text-[10px] text-slate-500 mt-0.5">
+                    sajjanpraveenkumar382@gmail.com • Pulmonology
+                  </p>
+                </div>
+                <div className="flex items-center gap-1 text-[10px] font-bold text-sky-800 bg-sky-200/80 group-hover:bg-sky-600 group-hover:text-white border border-sky-300 px-2 py-1 rounded-lg transition-all shrink-0 shadow-xs">
+                  <span>Sign In</span>
+                  <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                </div>
+              </button>
+
+              {/* Doctor: Dr. Anand Deshmukh */}
+              <button
+                type="button"
+                disabled={isLoading}
+                onClick={() => handleQuickLogin("doctor@hospital.org", "Doctor123!")}
+                className="w-full group text-left p-2.5 rounded-xl bg-slate-50 hover:bg-sky-50/70 border border-slate-200 hover:border-sky-300 transition-all flex items-center justify-between text-xs disabled:opacity-50 active:scale-[0.99] shadow-xs"
+              >
+                <div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="font-bold text-slate-900 group-hover:text-sky-700 transition-colors">
+                      🩺 ಡಾ. ಆನಂದ್ ದೇಶಮುಖ್ (Dr. Anand Deshmukh)
+                    </span>
+                  </div>
+                  <p className="text-[10px] text-slate-500 mt-0.5">
+                    doctor@hospital.org • Demo Doctor
+                  </p>
+                </div>
+                <div className="flex items-center gap-1 text-[10px] font-bold text-sky-800 bg-sky-100 group-hover:bg-sky-600 group-hover:text-white border border-sky-200 px-2 py-1 rounded-lg transition-all shrink-0 shadow-xs">
+                  <span>Sign In</span>
+                  <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                </div>
+              </button>
+
+              {/* Staff Nurse */}
               <button
                 type="button"
                 disabled={isLoading}
                 onClick={() => handleQuickLogin("staff@hospital.org", "Staff123!")}
-                className="group text-left p-3 rounded-xl bg-slate-50 hover:bg-emerald-50/70 border border-slate-200 hover:border-emerald-300 transition-all flex items-center justify-between text-xs disabled:opacity-50 active:scale-[0.99] shadow-xs"
+                className="w-full group text-left p-2.5 rounded-xl bg-slate-50 hover:bg-emerald-50/70 border border-slate-200 hover:border-emerald-300 transition-all flex items-center justify-between text-xs disabled:opacity-50 active:scale-[0.99] shadow-xs"
               >
                 <div>
                   <div className="flex items-center gap-1.5">
@@ -241,11 +310,11 @@ export function LoginPage() {
                       📋 ಪೂಜಾ ಶರ್ಮಾ (Staff Nurse)
                     </span>
                   </div>
-                  <p className="text-[11px] text-slate-500 mt-0.5">
-                    staff@hospital.org • ರೋಗಿಗಳ ನೋಂದಣಿ ಪ್ರವೇಶ
+                  <p className="text-[10px] text-slate-500 mt-0.5">
+                    staff@hospital.org • Clinical Intake
                   </p>
                 </div>
-                <div className="flex items-center gap-1 text-[11px] font-bold text-emerald-800 bg-emerald-100 group-hover:bg-emerald-600 group-hover:text-white border border-emerald-200 px-2.5 py-1 rounded-lg transition-all shrink-0 shadow-xs">
+                <div className="flex items-center gap-1 text-[10px] font-bold text-emerald-800 bg-emerald-100 group-hover:bg-emerald-600 group-hover:text-white border border-emerald-200 px-2 py-1 rounded-lg transition-all shrink-0 shadow-xs">
                   <span>Sign In</span>
                   <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
                 </div>
