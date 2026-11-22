@@ -182,7 +182,30 @@ export function LoginPage() {
             </div>
 
             <div className="grid grid-cols-1 gap-2.5">
-              {/* Doctor 1-Click Button */}
+              {/* Doctor 1: Dr. Poornachandra Badiger */}
+              <button
+                type="button"
+                disabled={isLoading}
+                onClick={() => handleQuickLogin("poornachandrabadiger208@gmail.com", "Poorna@030")}
+                className="group text-left p-3 rounded-xl bg-sky-50/50 hover:bg-sky-100/70 border border-sky-200 hover:border-sky-300 transition-all flex items-center justify-between text-xs disabled:opacity-50 active:scale-[0.99] shadow-xs"
+              >
+                <div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="font-bold text-slate-900 group-hover:text-sky-700 transition-colors">
+                      🩺 ಡಾ. ಪೂರ್ಣಚಂದ್ರ ಬಡಿಗೇರ್ (Dr. Poornachandra)
+                    </span>
+                  </div>
+                  <p className="text-[11px] text-slate-500 mt-0.5">
+                    poornachandrabadiger208@gmail.com • ವೈದ್ಯರ ಪ್ರವೇಶ
+                  </p>
+                </div>
+                <div className="flex items-center gap-1 text-[11px] font-bold text-sky-800 bg-sky-200/80 group-hover:bg-sky-600 group-hover:text-white border border-sky-300 px-2.5 py-1 rounded-lg transition-all shrink-0 shadow-xs">
+                  <span>Sign In</span>
+                  <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                </div>
+              </button>
+
+              {/* Doctor 2: Dr. Anand Deshmukh */}
               <button
                 type="button"
                 disabled={isLoading}
@@ -192,7 +215,7 @@ export function LoginPage() {
                 <div>
                   <div className="flex items-center gap-1.5">
                     <span className="font-bold text-slate-900 group-hover:text-sky-700 transition-colors">
-                      🩺 ಡಾ. ಆನಂದ್ ದೇಶಮುಖ್ (Doctor)
+                      🩺 ಡಾ. ಆನಂದ್ ದೇಶಮುಖ್ (Dr. Anand)
                     </span>
                   </div>
                   <p className="text-[11px] text-slate-500 mt-0.5">
