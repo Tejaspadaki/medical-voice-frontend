@@ -9,6 +9,7 @@ export function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isWakingServer, setIsWakingServer] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   useEffect(() => {
@@ -16,6 +17,21 @@ export function LoginPage() {
       navigate("/dashboard");
     }
   }, [isAuthenticated, navigate]);
+
+  useEffect(() => {
+    // Ping backend health in background to wake up cold Render instance immediately when page loads
+    fetch("https://medical-voice-backend-jvnd.onrender.com/health").catch(() => {});
+  }, []);
+
+  useEffect(() => {
+    let timer: any;
+    if (isLoading) {
+      timer = setTimeout(() => setIsWakingServer(true), 3500);
+    } else {
+      setIsWakingServer(false);
+    }
+    return () => clearTimeout(timer);
+  }, [isLoading]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -85,6 +101,16 @@ export function LoginPage() {
             <div className="p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-xs flex items-start gap-2.5 animate-in fade-in duration-200">
               <AlertCircle className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
               <span>{errorMessage}</span>
+            </div>
+          )}
+
+          {isWakingServer && !errorMessage && (
+            <div className="p-3.5 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-xs flex items-start gap-2.5 animate-in fade-in duration-200">
+              <Loader2 className="w-4 h-4 text-amber-600 shrink-0 mt-0.5 animate-spin" />
+              <div>
+                <p className="font-bold">ಕ್ಲೌಡ್ ಸರ್ವರ್ ಸಂಪರ್ಕಿಸಲಾಗುತ್ತಿದೆ (Waking Cloud Server)...</p>
+                <p className="text-[11px] text-amber-700 mt-0.5">Render free instance is spinning up. Please wait 15-30 seconds.</p>
+              </div>
             </div>
           )}
 

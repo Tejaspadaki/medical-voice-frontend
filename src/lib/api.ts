@@ -109,15 +109,28 @@ export class ApiClient {
     }
   }
 
+  private static async executeFetch(url: string, options: RequestInit): Promise<Response> {
+    try {
+      const res = await fetch(url, options);
+      if (res.status === 401) {
+        this.handleAuthError();
+      }
+      return res;
+    } catch (err: any) {
+      if (err.name === "TypeError" && (err.message?.includes("fetch") || err.message?.includes("NetworkError"))) {
+        throw new Error(
+          "Unable to connect to the medical cloud backend. The Render cloud server may be waking up (Render free tier spin-up takes ~30-45s). Please wait a few seconds and try again."
+        );
+      }
+      throw err;
+    }
+  }
+
   static async get<T>(endpoint: string): Promise<T> {
-    const res = await fetch(`${API_BASE_URL}${endpoint}`, {
+    const res = await this.executeFetch(`${API_BASE_URL}${endpoint}`, {
       method: "GET",
       headers: this.getHeaders(),
     });
-
-    if (res.status === 401) {
-      this.handleAuthError();
-    }
 
     if (!res.ok) {
       const errorData = await res.json().catch(() => ({ detail: res.statusText }));
@@ -129,15 +142,11 @@ export class ApiClient {
 
   static async post<T>(endpoint: string, body: any, customHeaders: Record<string, string> = {}): Promise<T> {
     const isFormData = body instanceof FormData;
-    const res = await fetch(`${API_BASE_URL}${endpoint}`, {
+    const res = await this.executeFetch(`${API_BASE_URL}${endpoint}`, {
       method: "POST",
       headers: this.getHeaders(customHeaders, isFormData),
       body: isFormData ? body : JSON.stringify(body),
     });
-
-    if (res.status === 401) {
-      this.handleAuthError();
-    }
 
     if (!res.ok) {
       const errorData = await res.json().catch(() => ({ detail: res.statusText }));
@@ -148,15 +157,11 @@ export class ApiClient {
   }
 
   static async put<T>(endpoint: string, body: any): Promise<T> {
-    const res = await fetch(`${API_BASE_URL}${endpoint}`, {
+    const res = await this.executeFetch(`${API_BASE_URL}${endpoint}`, {
       method: "PUT",
       headers: this.getHeaders(),
       body: JSON.stringify(body),
     });
-
-    if (res.status === 401) {
-      this.handleAuthError();
-    }
 
     if (!res.ok) {
       const errorData = await res.json().catch(() => ({ detail: res.statusText }));
@@ -167,14 +172,10 @@ export class ApiClient {
   }
 
   static async delete<T = void>(endpoint: string): Promise<T> {
-    const res = await fetch(`${API_BASE_URL}${endpoint}`, {
+    const res = await this.executeFetch(`${API_BASE_URL}${endpoint}`, {
       method: "DELETE",
       headers: this.getHeaders(),
     });
-
-    if (res.status === 401) {
-      this.handleAuthError();
-    }
 
     if (!res.ok) {
       const errorData = await res.json().catch(() => ({ detail: res.statusText }));
