@@ -171,6 +171,21 @@ export class ApiClient {
     return res.json();
   }
 
+  static async patch<T>(endpoint: string, body: any): Promise<T> {
+    const res = await this.executeFetch(`${API_BASE_URL}${endpoint}`, {
+      method: "PATCH",
+      headers: this.getHeaders(),
+      body: JSON.stringify(body),
+    });
+
+    if (!res.ok) {
+      const errorData = await res.json().catch(() => ({ detail: res.statusText }));
+      throw new Error(errorData.detail || `Request failed with status ${res.status}`);
+    }
+
+    return res.json();
+  }
+
   static async delete<T = void>(endpoint: string): Promise<T> {
     const res = await this.executeFetch(`${API_BASE_URL}${endpoint}`, {
       method: "DELETE",
@@ -284,6 +299,34 @@ export const MLExperimentApi = {
   getTrainingJob: (jobId: string) => ApiClient.get<any>(`/models/training/${jobId}`),
 
   getReportDownloadUrl: (evaluationId: string) => `${API_BASE_URL}/models/evaluation/${evaluationId}/report`,
+};
+
+// Admin API (Doctor & Staff Management Only)
+export const AdminApi = {
+  listUsers: () =>
+    ApiClient.get<{
+      items: any[];
+      total: number;
+      doctors_count: number;
+      staff_count: number;
+      admin_count: number;
+    }>(`/admin/users`),
+
+  createUser: (payload: {
+    full_name: string;
+    email: string;
+    password: string;
+    role_name: "Doctor" | "Staff";
+    specialization?: string;
+    registration_no?: string;
+    department?: string;
+    contact_phone?: string;
+  }) => ApiClient.post<any>(`/admin/users`, payload),
+
+  toggleStatus: (userId: number, is_active: boolean) =>
+    ApiClient.patch<any>(`/admin/users/${userId}/status`, { is_active }),
+
+  deleteUser: (userId: number) => ApiClient.delete(`/admin/users/${userId}`),
 };
 
 // Voice Agent API (Interactive Clinical Orchestrator)

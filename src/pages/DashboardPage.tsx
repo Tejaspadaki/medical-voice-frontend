@@ -17,9 +17,11 @@ import { ConsultationHistoryModal } from "@/components/ConsultationHistoryModal"
 import { ConsultationModal } from "@/components/ConsultationModal";
 import { PrescriptionLetterheadModal } from "@/components/PrescriptionLetterheadModal";
 import { VoiceAssistantModal } from "@/components/VoiceAssistantModal";
+import { AdminPortalView } from "@/components/AdminPortalView";
 
 export function DashboardPage() {
   const { user } = useAuth();
+  const isAdmin = user?.role?.name === "Admin" || user?.role_id === 1;
   const { success, error: toastError } = useToast();
   const queryClient = useQueryClient();
   const [searchTerm, setSearchTerm] = useState("");
@@ -65,10 +67,11 @@ export function DashboardPage() {
   const [clinicalAssessment, setClinicalAssessment] = useState<any | null>(null);
   const [formError, setFormError] = useState<string | null>(null);
 
-  // Fetch Patients Query
+  // Fetch Patients Query (Clinical roles only; Admin manages doctors/staff)
   const { data: patientData, isLoading, isError } = useQuery<PatientListResponse>({
     queryKey: ["patients", searchTerm],
     queryFn: () => ApiClient.get<PatientListResponse>(`/patients?search=${encodeURIComponent(searchTerm)}&size=50`),
+    enabled: !isAdmin,
   });
 
   // Create Patient Mutation
@@ -311,6 +314,17 @@ export function DashboardPage() {
     if (id === 3) return "PT-0003_Mohammed_Farooq.mp3";
     return "PT-0001_Basavaraj_Patil.mp3";
   };
+
+  if (isAdmin) {
+    return (
+      <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans">
+        <Header />
+        <main className="flex-1 max-w-7xl w-full mx-auto p-6">
+          <AdminPortalView currentUser={user} />
+        </main>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans">
