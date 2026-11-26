@@ -51,7 +51,10 @@ interface ConsultationModalProps {
   setEditableDiagnosis: (val: string) => void;
   editableSymptoms: any[];
   editableMedications: any[];
+  setEditableMedications?: (val: any[]) => void;
   editableAdvice: any[];
+  clinicalAssessment?: any;
+  onAssessmentUpdated?: (updated: any) => void;
   onApproveReport: () => void;
   onOpenPrintModal: () => void;
 }
@@ -88,7 +91,10 @@ export function ConsultationModal({
   setEditableDiagnosis,
   editableSymptoms,
   editableMedications,
+  setEditableMedications,
   editableAdvice,
+  clinicalAssessment,
+  onAssessmentUpdated,
   onApproveReport,
   onOpenPrintModal,
 }: ConsultationModalProps) {
@@ -482,7 +488,10 @@ export function ConsultationModal({
           setEditableDiagnosis={setEditableDiagnosis}
           editableSymptoms={editableSymptoms}
           editableMedications={editableMedications}
+          setEditableMedications={setEditableMedications}
           editableAdvice={editableAdvice}
+          clinicalAssessment={clinicalAssessment}
+          onAssessmentUpdated={onAssessmentUpdated}
           onApproveReport={onApproveReport}
           onOpenPrintModal={onOpenPrintModal}
           onReTranslateEnglish={handleProcessEnglishText}

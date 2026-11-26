@@ -232,6 +232,24 @@ export const ConsultationsApi = {
     ApiClient.delete(`/consultations/${consultationId}`),
 };
 
+// Clinical Assessment & Medication Decision Support API
+export const ClinicalAssessmentApi = {
+  analyze: (payload: any) =>
+    ApiClient.post<any>(`/clinical-assessment/analyze`, payload),
+
+  getById: (assessmentId: string) =>
+    ApiClient.get<any>(`/clinical-assessment/${assessmentId}`),
+
+  evaluateMedications: (assessmentId: string, payload: { requested_medications: string[]; target_indication?: string }) =>
+    ApiClient.post<any>(`/clinical-assessment/${assessmentId}/medications`, payload),
+
+  review: (assessmentId: string, payload: { items: any[]; doctor_notes?: string }) =>
+    ApiClient.post<any>(`/clinical-assessment/${assessmentId}/review`, payload),
+
+  approve: (assessmentId: string, payload: any) =>
+    ApiClient.post<any>(`/clinical-assessment/${assessmentId}/approve`, payload),
+};
+
 // Voice Agent API (Interactive Clinical Orchestrator)
 export const VoiceAgentApi = {
   startSession: (patientId?: number, language: string = "kn") =>

@@ -62,6 +62,7 @@ export function DashboardPage() {
   const [editableSymptoms, setEditableSymptoms] = useState<any[]>([]);
   const [editableMedications, setEditableMedications] = useState<any[]>([]);
   const [editableAdvice, setEditableAdvice] = useState<any[]>([]);
+  const [clinicalAssessment, setClinicalAssessment] = useState<any | null>(null);
   const [formError, setFormError] = useState<string | null>(null);
 
   // Fetch Patients Query
@@ -131,9 +132,7 @@ export function DashboardPage() {
         "Patient Mohammed Farooq presents with acute burning epigastric pain, nausea and vomiting sensation for 2 days. Diagnosed with acute acid peptic disease and gastritis. Prescribed Pantoprazole 40mg OD before breakfast and Domperidone 10mg BD before meals for 5 days. Advised to avoid spicy oily foods and drink plenty of water."
       );
     } else {
-      setEnglishTextInput(
-        `Patient ${patient.full_name} presents with complaints of high fever and severe headache for 3 days. Diagnosed with viral fever. Prescribed Paracetamol 650mg TDS for 3 days and Cetirizine 10mg OD for 5 days. Advised warm water, rest, and follow up if fever persists.`
-      );
+      setEnglishTextInput("");
     }
   };
 
@@ -228,6 +227,7 @@ export function DashboardPage() {
       setEditableSymptoms(data.entities?.symptoms || []);
       setEditableMedications(data.entities?.medications || []);
       setEditableAdvice(data.entities?.advice || []);
+      setClinicalAssessment(data.clinical_assessment || null);
       setIsApproved(false);
       success("Doctor notes translated and Kannada clinical entities extracted.", "AI Processing Complete");
     } catch (err: any) {
@@ -262,6 +262,7 @@ export function DashboardPage() {
       setEditableSymptoms(data.entities?.symptoms || []);
       setEditableMedications(data.entities?.medications || []);
       setEditableAdvice(data.entities?.advice || []);
+      setClinicalAssessment(data.clinical_assessment || null);
       setIsApproved(false);
       success("Speech transcribed with IndicWhisper and Clinical NER extracted.", "Transcription Ready");
     } catch (err: any) {
@@ -376,7 +377,10 @@ export function DashboardPage() {
           setEditableDiagnosis={setEditableDiagnosis}
           editableSymptoms={editableSymptoms}
           editableMedications={editableMedications}
+          setEditableMedications={setEditableMedications}
           editableAdvice={editableAdvice}
+          clinicalAssessment={clinicalAssessment}
+          onAssessmentUpdated={setClinicalAssessment}
           onApproveReport={handleApproveReport}
           onOpenPrintModal={() => setShowPrintModal(true)}
         />

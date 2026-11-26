@@ -15,6 +15,8 @@ import {
   Clock,
   HeartHandshake,
 } from "lucide-react";
+import { ClinicalAssessment } from "@/types";
+import { ClinicalAssessmentPanel } from "./ClinicalAssessmentPanel";
 
 interface DoctorReviewWorkspaceProps {
   user: any;
@@ -27,7 +29,11 @@ interface DoctorReviewWorkspaceProps {
   setEditableDiagnosis: (val: string) => void;
   editableSymptoms: any[];
   editableMedications: any[];
+  setEditableMedications?: (val: any[]) => void;
   editableAdvice: any[];
+  clinicalAssessment?: ClinicalAssessment | null;
+  onAssessmentUpdated?: (updated: ClinicalAssessment) => void;
+  onRunFreshAssessment?: () => void;
   onApproveReport: () => void;
   onOpenPrintModal: () => void;
   onReTranslateEnglish?: (text: string) => void;
@@ -45,7 +51,11 @@ export function DoctorReviewWorkspace({
   setEditableDiagnosis,
   editableSymptoms,
   editableMedications,
+  setEditableMedications,
   editableAdvice,
+  clinicalAssessment = null,
+  onAssessmentUpdated,
+  onRunFreshAssessment,
   onApproveReport,
   onOpenPrintModal,
   onReTranslateEnglish,
@@ -171,6 +181,21 @@ export function DoctorReviewWorkspace({
           </p>
         </div>
       </div>
+
+      {/* 2b. Intelligent Clinical Assessment & Medication Decision Support */}
+      <ClinicalAssessmentPanel
+        assessment={clinicalAssessment || consultationResult?.clinical_assessment || null}
+        onAssessmentUpdated={(updated) => {
+          if (onAssessmentUpdated) onAssessmentUpdated(updated);
+        }}
+        onApplyApprovedMedications={(meds) => {
+          if (setEditableMedications && meds.length > 0) {
+            setEditableMedications(meds);
+          }
+        }}
+        onRunFreshAssessment={onRunFreshAssessment}
+        isLoading={isProcessingASR}
+      />
 
       {/* 3. Prescribed Medications Table in Kannada */}
       <div className="space-y-2">
