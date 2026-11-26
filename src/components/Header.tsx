@@ -2,10 +2,13 @@
 
 import React from "react";
 import { useAuth } from "@/context/AuthContext";
-import { Stethoscope, LogOut, User, Globe2 } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
+import { Stethoscope, LogOut, User, Globe2, BarChart3 } from "lucide-react";
 
 export function Header() {
   const { user, logout } = useAuth();
+  const location = useLocation();
+  const isMLLab = location.pathname.startsWith("/ml-lab");
   const doctorReg = user?.doctor_profile?.registration_no || "KMC-84920";
   const doctorSpecialization = user?.doctor_profile?.specialization || "ಮುಖ್ಯ ವೈದ್ಯಾಧಿಕಾರಿ (Chief Medical Officer)";
 
@@ -39,6 +42,13 @@ export function Header() {
 
         {/* Practitioner Profile & Sign Out (Bilingual) */}
         <div className="flex items-center gap-3">
+          <Link
+            to={isMLLab ? "/dashboard" : "/ml-lab"}
+            className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-indigo-800 border border-indigo-200 text-xs font-bold transition-all active:scale-95 shadow-xs"
+          >
+            {isMLLab ? <Stethoscope className="w-3.5 h-3.5" /> : <BarChart3 className="w-3.5 h-3.5" />}
+            <span>{isMLLab ? "Clinical Dashboard" : "ML Evaluation Lab"}</span>
+          </Link>
           <div className="hidden sm:flex items-center gap-3 pr-3 border-r border-slate-200">
             <div className="w-9 h-9 rounded-full bg-sky-50 border border-sky-100 flex items-center justify-center text-sky-600 shadow-xs">
               <User className="w-4 h-4 text-sky-600" />

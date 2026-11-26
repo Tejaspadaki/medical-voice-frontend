@@ -250,6 +250,42 @@ export const ClinicalAssessmentApi = {
     ApiClient.post<any>(`/clinical-assessment/${assessmentId}/approve`, payload),
 };
 
+// ML Audio Experimentation, Training & Visualization API
+export const MLExperimentApi = {
+  getRegistry: () => ApiClient.get<{ models: any[]; total: number }>(`/models/registry`),
+
+  listDatasets: () => ApiClient.get<{ items: any[]; total: number }>(`/audio-datasets`),
+
+  getDataset: (datasetId: string) => ApiClient.get<any>(`/audio-datasets/${datasetId}`),
+
+  uploadDataset: (formData: FormData) => ApiClient.post<any>(`/audio-datasets/upload`, formData),
+
+  importLocalDataset: (sourceFolder: "submission_kannada_audios" | "sample_audios", datasetName?: string) =>
+    ApiClient.post<any>(
+      `/audio-datasets/import-local?source_folder=${encodeURIComponent(sourceFolder)}${
+        datasetName ? `&dataset_name=${encodeURIComponent(datasetName)}` : ""
+      }`,
+      {}
+    ),
+
+  saveAnnotations: (datasetId: string, annotations: any[]) =>
+    ApiClient.post<any>(`/audio-datasets/${datasetId}/annotations`, { annotations }),
+
+  evaluateModels: (payload: any) => ApiClient.post<any>(`/models/evaluate`, payload),
+
+  listEvaluations: () => ApiClient.get<{ items: any[]; total: number }>(`/models/evaluations`),
+
+  getEvaluation: (evaluationId: string) => ApiClient.get<any>(`/models/evaluation/${evaluationId}`),
+
+  getGraphs: (evaluationId: string) => ApiClient.get<any>(`/models/evaluation/${evaluationId}/graphs`),
+
+  trainModel: (payload: any) => ApiClient.post<any>(`/models/train`, payload),
+
+  getTrainingJob: (jobId: string) => ApiClient.get<any>(`/models/training/${jobId}`),
+
+  getReportDownloadUrl: (evaluationId: string) => `${API_BASE_URL}/models/evaluation/${evaluationId}/report`,
+};
+
 // Voice Agent API (Interactive Clinical Orchestrator)
 export const VoiceAgentApi = {
   startSession: (patientId?: number, language: string = "kn") =>

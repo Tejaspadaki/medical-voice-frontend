@@ -6,6 +6,7 @@ import { ToastProvider } from "@/context/ToastContext";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { LoginPage } from "@/pages/LoginPage";
 import { DashboardPage } from "@/pages/DashboardPage";
+import { MLDashboardPage } from "@/pages/MLDashboardPage";
 import { NotFoundPage } from "@/pages/NotFoundPage";
 
 const queryClient = new QueryClient({
@@ -30,6 +31,14 @@ export function App() {
                 element={
                   <ProtectedRoute>
                     <DashboardPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/ml-lab"
+                element={
+                  <ProtectedRoute>
+                    <MLDashboardPage />
                   </ProtectedRoute>
                 }
               />
